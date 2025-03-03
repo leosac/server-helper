@@ -1,4 +1,6 @@
 ﻿
+using Microsoft.AspNetCore.DataProtection.KeyManagement;
+
 namespace Leosac.ServerHelper
 {
     public class JwtSettings
@@ -12,6 +14,11 @@ namespace Leosac.ServerHelper
         public string? Audience { get; set; }
 
         public int Expiration { get; set; } = 30;
+
+        public bool IsEnabled()
+        {
+            return !string.IsNullOrEmpty(Key) || !string.IsNullOrEmpty(KeyFile);
+        }
 
         public byte[]? GetKey()
         {
